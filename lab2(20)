@@ -1,0 +1,31 @@
+package main
+
+import (
+	"fmt"
+
+)
+type ErrNegativeSqrt float64
+
+func (e ErrNegativeSqrt) Error() string {
+	return fmt.Sprintf("can not Sqrt negative number:%v", float64(e))
+}
+
+
+func Sqrt(x float64) (float64, error) {
+	a := 1.0
+	if x >= 0{
+	for i := 0; i < 10; i++{
+		a -= (a*a - x) / (2*a)
+		fmt.Println(a)
+		
+	}}else{
+		return 0, ErrNegativeSqrt(x)
+	}
+	
+	return a, nil
+}
+	
+func main() {
+	fmt.Println(Sqrt(2))
+	fmt.Println(Sqrt(-2))
+}
